@@ -98,7 +98,6 @@ class S3Storage:
 
     def __init__(self, name=None):
         self.name = name
-        # import ipdb; ipdb.set_trace()
         session = boto3.session.Session()
         self.s3_client = boto3.client(
             's3',
@@ -106,37 +105,18 @@ class S3Storage:
             aws_secret_access_key=settings.AWS_SECRET_ACCESS_KEY
         )
 
-        # self.s3_client = session.resource(
-        #     's3',
-        #     aws_access_key_id=settings.AWS_ACCESS_KEY_ID,
-        #     aws_secret_access_key=settings.AWS_SECRET_ACCESS_KEY
-        # )
-        # for bucket in s3.buckets.all():
-        #     print(bucket.name)
-        # self.bucket = s3.Bucket("import-export-csv")
-        # self.s3_client = boto3.client(
-        #     's3',
-        #     aws_access_key_id=settings.AWS_SECRET_ACCESS_KEY,
-        #     aws_secret_access_key=settings.AWS_ACCESS_KEY_ID
-        # )
     def save(self, data, mode='w'):
 
         f = io.BytesIO(data)
         if self.name is None:
             self.name = uuid4().hex
-        # import ipdb; ipdb.set_trace()
         self.s3_client.upload_fileobj(f, "import-export-csv", self.name)
 
     def read(self, read_mode='r'):
         f = io.BytesIO()
         self.s3_client.download_fileobj("import-export-csv", self.name, f)
-        # content = f.read()
-        # import ipdb; ipdb.set_trace()
-        # return content
         f.seek(0)
         return f.read()
 
     def remove(self):
-        # import ipdb; ipdb.set_trace()
-        # import ipdb; ipdb.set_trace()
         self.s3_client.delete_object(Bucket="import-export-csv", Key=self.name)
