@@ -1,3 +1,4 @@
 Django>=2.0
 tablib[html,ods,xls,xlsx,yaml]>=0.14
 diff-match-patch
+boto3==1.14.43

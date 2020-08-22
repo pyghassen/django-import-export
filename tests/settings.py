@@ -104,3 +104,9 @@ LOGGING = {
 
 # USE_TZ = True
 # TIME_ZONE = 'Europe/Ljubljana'
+from import_export.tmp_storages import S3Storage
+AWS_ACCESS_KEY_ID = 'AKIA6FCJITCWKDZO3CNP'
+
+AWS_SECRET_ACCESS_KEY = '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'
+
+IMPORT_EXPORT_TMP_STORAGE_CLASS = S3Storage
