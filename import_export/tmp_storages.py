@@ -1,9 +1,12 @@
+import io
 import os
 import tempfile
 from uuid import uuid4
 
+import boto3
 from django.core.cache import cache
 from django.core.files.base import ContentFile
+from django.conf import settings
 from django.core.files.storage import default_storage
 
 
@@ -89,10 +92,7 @@ class MediaStorage(BaseStorage):
             self.MEDIA_FOLDER,
             self.name
         )
-import boto3
-import io
-from uuid import uuid4
-from django.conf import settings
+
 
 class S3Storage:
 
